@@ -1,65 +1,27 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل تحويل XML و JSON التفاعلي</title>
-    
-    <!-- استدعاء خط IBM Plex Sans Arabic -->
+
+    <!-- IBM Plex Sans Arabic Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- استدعاء Tailwind CSS للتصميم السريع -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-        body {
-            font-family: 'IBM Plex Sans Arabic', sans-serif;
-            background-color: #f3f4f6;
-        }
-        
-        /* تنسيق مناطق الكود */
-        textarea {
-            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.5;
-            white-space: pre;
-            overflow-wrap: normal;
-            overflow-x: scroll;
-            direction: ltr;
-            text-align: left;
-        }
-
-        .code-container {
-            transition: all 0.3s ease;
-        }
-
-        .code-container:focus-within {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-        }
-
-        /* تخصيص شريط التمرير */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
-        }
-    </style>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body class="text-slate-800 min-h-screen flex flex-col">
 
-    <!-- رأس الصفحة -->
+    <!-- Header -->
     <header class="bg-indigo-700 text-white shadow-lg">
         <div class="container mx-auto px-4 py-6">
             <h1 class="text-3xl font-bold mb-2">الدليل التفاعلي: التحويل بين XML و JSON</h1>
@@ -67,17 +29,18 @@
         </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
+    <!-- Main Content -->
     <main class="container mx-auto px-4 py-8 flex-grow">
-        
-        <!-- شريط التحكم واختيار الأمثلة -->
+
+        <!-- Control Bar -->
         <div class="bg-white rounded-xl shadow-md p-6 mb-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                
-                <!-- اختيار المثال -->
+
+                <!-- Example Selector -->
                 <div>
                     <label class="block text-sm font-medium text-slate-600 mb-2">اختر مثالاً تعليمياً:</label>
-                    <select id="exampleSelector" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <select id="exampleSelector"
+                        class="w-full bg-slate-50 border border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
                         <option value="simple">1. كائن بسيط (بيانات موظف)</option>
                         <option value="array">2. مصفوفة عناصر (قائمة كتب)</option>
                         <option value="attributes">3. التعامل مع السمات (Attributes)</option>
@@ -86,20 +49,27 @@
                     </select>
                 </div>
 
-                <!-- اتجاه التحويل -->
+                <!-- Conversion Direction -->
                 <div>
                     <label class="block text-sm font-medium text-slate-600 mb-2">اتجاه التحويل:</label>
                     <div class="flex bg-slate-100 p-1 rounded-lg">
-                        <button id="btnXmlToJson" class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors bg-white text-indigo-700 shadow-sm">XML إلى JSON</button>
-                        <button id="btnJsonToXml" class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors text-slate-600 hover:text-indigo-700">JSON إلى XML</button>
+                        <button id="btnXmlToJson"
+                            class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors bg-white text-indigo-700 shadow-sm">XML
+                            إلى JSON</button>
+                        <button id="btnJsonToXml"
+                            class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors text-slate-600 hover:text-indigo-700">JSON
+                            إلى XML</button>
                     </div>
                 </div>
 
-                <!-- زر التنفيذ -->
+                <!-- Convert Button -->
                 <div>
-                    <button id="convertBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition transform active:scale-95 flex items-center justify-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    <button id="convertBtn"
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                         </svg>
                         تحويل الآن
                     </button>
@@ -107,10 +77,10 @@
             </div>
         </div>
 
-        <!-- منطقة العمل (Editors) -->
+        <!-- Editor Area -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
-            <!-- الصندوق الأيمن (الإدخال/المصدر) -->
+
+            <!-- Input Box -->
             <div class="flex flex-col">
                 <div class="flex justify-between items-center mb-2">
                     <h2 id="leftLabel" class="text-lg font-bold text-indigo-800 flex items-center gap-2">
@@ -120,11 +90,13 @@
                     <span class="text-xs text-slate-500">قابل للتعديل</span>
                 </div>
                 <div class="code-container relative flex-grow">
-                    <textarea id="inputArea" class="w-full h-96 p-4 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white text-slate-800 shadow-inner resize-none" spellcheck="false"></textarea>
+                    <textarea id="inputArea"
+                        class="w-full h-96 p-4 rounded-lg border border-slate-300 bg-slate-50 focus:bg-white text-slate-800 shadow-inner resize-none"
+                        spellcheck="false"></textarea>
                 </div>
             </div>
 
-            <!-- الصندوق الأيسر (المخرجات/الهدف) -->
+            <!-- Output Box -->
             <div class="flex flex-col">
                 <div class="flex justify-between items-center mb-2">
                     <h2 id="rightLabel" class="text-lg font-bold text-emerald-800 flex items-center gap-2">
@@ -134,12 +106,14 @@
                     <span class="text-xs text-slate-500">للقراءة فقط</span>
                 </div>
                 <div class="code-container relative flex-grow">
-                    <textarea id="outputArea" class="w-full h-96 p-4 rounded-lg border border-slate-300 bg-slate-900 text-green-400 shadow-inner resize-none" readonly></textarea>
+                    <textarea id="outputArea"
+                        class="w-full h-96 p-4 rounded-lg border border-slate-300 bg-slate-900 text-green-400 shadow-inner resize-none"
+                        readonly></textarea>
                 </div>
             </div>
         </div>
 
-        <!-- منطقة الشرح والتعليقات -->
+        <!-- Explanation Area -->
         <div class="mt-8 bg-blue-50 border-r-4 border-blue-500 p-6 rounded-lg shadow-sm">
             <h3 class="text-xl font-bold text-blue-900 mb-3">💡 شرح منطق التحويل (Logic Analysis)</h3>
             <p id="explanationText" class="text-blue-800 leading-relaxed">
@@ -149,315 +123,13 @@
 
     </main>
 
-    <!-- تذييل الصفحة -->
+    <!-- Footer -->
     <footer class="bg-slate-800 text-slate-400 py-6 text-center text-sm mt-auto">
         <p>تم التصميم باستخدام Tailwind CSS و JavaScript | الخط المستخدم: IBM Plex Sans Arabic</p>
     </footer>
 
-    <!-- السكريبت (المنطق البرمجي) -->
-    <script>
-        // --- 1. البيانات (الأمثلة) ---
-        const examples = {
-            simple: {
-                xml: `<!-- مثال 1: كائن بسيط -->
-<employee>
-    <id>101</id>
-    <name>أحمد علي</name>
-    <role>مطور ويب</role>
-    <active>true</active>
-</employee>`,
-                json: `{
-  // مثال 1: كائن بسيط
-  "employee": {
-    "id": 101,
-    "name": "أحمد علي",
-    "role": "مطور ويب",
-    "active": true
-  }
-}`,
-                explanation: "في الحالة البسيطة: تتحول التاغات (Tags) في XML إلى مفاتيح (Keys) في JSON. النص داخل التاغ يصبح القيمة (Value). لاحظ كيف يتم تحويل الأرقام والقيم المنطقية (true/false) مباشرة إذا أمكن التعرف عليها."
-            },
-            array: {
-                xml: `<!-- مثال 2: مصفوفة -->
-<library>
-    <book>
-        <title>مقدمة في البرمجة</title>
-        <price>50</price>
-    </book>
-    <book>
-        <title>عالم الذكاء الاصطناعي</title>
-        <price>75</price>
-    </book>
-</library>`,
-                json: `{
-  // مثال 2: مصفوفة
-  "library": {
-    "book": [
-      {
-        "title": "مقدمة في البرمجة",
-        "price": 50
-      },
-      {
-        "title": "عالم الذكاء الاصطناعي",
-        "price": 75
-      }
-    ]
-  }
-}`,
-                explanation: "عندما يتكرر نفس التاغ (book) داخل العنصر الأب (library) في XML، يتم تحويله في JSON إلى مصفوفة (Array) [ ... ] تحتوي على كائنات."
-            },
-            attributes: {
-                xml: `<!-- مثال 3: التعامل مع السمات -->
-<product id="p500" category="electronics">
-    <name>هاتف ذكي</name>
-    <stock>20</stock>
-</product>`,
-                json: `{
-  // مثال 3: السمات تتحول لخصائص
-  "product": {
-    "@id": "p500",
-    "@category": "electronics",
-    "name": "هاتف ذكي",
-    "stock": 20
-  }
-}`,
-                explanation: "السمات (Attributes) في XML مثل id=\"p500\" لا يوجد لها مقابل مباشر في بنية JSON القياسية. العرف السائد هو تحويلها إلى مفاتيح تبدأ بـ @ أو _ (مثل @id) لتمييزها عن العناصر الفرعية."
-            },
-            nested: {
-                xml: `<!-- مثال 4: هياكل متداخلة -->
-<menu>
-    <breakfast>
-        <item>بيض مقلي</item>
-        <item>قهوة</item>
-    </breakfast>
-    <lunch>
-        <main>دجاج مشوي</main>
-        <side>سلطة</side>
-    </lunch>
-</menu>`,
-                json: `{
-  // مثال 4: الكائنات المتداخلة
-  "menu": {
-    "breakfast": {
-      "item": [
-        "بيض مقلي",
-        "قهوة"
-      ]
-    },
-    "lunch": {
-      "main": "دجاج مشوي",
-      "side": "سلطة"
-    }
-  }
-}`,
-                explanation: "يظهر هنا التداخل (Nesting). العنصر <breakfast> يحتوي على مصفوفة نصوص لأن <item> تكرر. بينما <lunch> يحتوي على كائن لأن عناصره مختلفة ومسماة."
-            },
-            mixed: {
-                xml: `<!-- مثال 5: بيانات مختلطة -->
-<config>
-    <server>production-01</server>
-    <ports>
-        <port>80</port>
-        <port>443</port>
-        <port>8080</port>
-    </ports>
-    <admin_contact email="admin@site.com">الدعم الفني</admin_contact>
-</config>`,
-                json: `{
-  // مثال 5: قيمة نصية مع سمات
-  "config": {
-    "server": "production-01",
-    "ports": {
-      "port": [ 80, 443, 8080 ]
-    },
-    "admin_contact": {
-      "@email": "admin@site.com",
-      "#text": "الدعم الفني"
-    }
-  }
-}`,
-                explanation: "حالة متقدمة: عندما يحتوي عنصر XML على نص وسمة في نفس الوقت (مثل admin_contact)، يتم وضع النص عادة في مفتاح خاص يسمى #text أو content، والسمات في مفاتيحها الخاصة."
-            }
-        };
-
-        // --- 2. المتغيرات والتهيئة ---
-        let currentMode = 'xml2json'; // or 'json2xml'
-        const inputArea = document.getElementById('inputArea');
-        const outputArea = document.getElementById('outputArea');
-        const exampleSelector = document.getElementById('exampleSelector');
-        const explanationText = document.getElementById('explanationText');
-        
-        const btnXmlToJson = document.getElementById('btnXmlToJson');
-        const btnJsonToXml = document.getElementById('btnJsonToXml');
-        const convertBtn = document.getElementById('convertBtn');
-        const leftLabel = document.getElementById('leftLabel');
-        const rightLabel = document.getElementById('rightLabel');
-
-        // --- 3. الوظائف المساعدة (Logic Functions) ---
-
-        // دالة بسيطة لمحاكاة تحويل XML لـ JSON (لغرض العرض التفاعلي)
-        // ملاحظة: لتحويل حقيقي 100% يجب استخدام مكتبة معقدة، هنا نستخدم منطق مبسط للدليل
-        function parseXmlToJson(xmlStr) {
-            try {
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(xmlStr, "text/xml");
-                
-                // التحقق من أخطاء التحليل
-                if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
-                    return { error: "خطأ في صيغة XML" };
-                }
-
-                function xmlToObj(node) {
-                    let obj = {};
-
-                    if (node.nodeType === 1) { // element
-                        // السمات
-                        if (node.attributes.length > 0) {
-                            for (let j = 0; j < node.attributes.length; j++) {
-                                const attribute = node.attributes.item(j);
-                                obj["@" + attribute.nodeName] = attribute.nodeValue;
-                            }
-                        }
-                    } else if (node.nodeType === 3) { // text
-                        return node.nodeValue.trim();
-                    }
-
-                    // الأبناء
-                    if (node.hasChildNodes()) {
-                        for(let i = 0; i < node.childNodes.length; i++) {
-                            const item = node.childNodes.item(i);
-                            const nodeName = item.nodeName;
-
-                            // تجاهل التعليقات والمساحات الفارغة الصرفة
-                            if (nodeName === "#comment") continue; 
-                            if (nodeName === "#text" && !item.nodeValue.trim()) continue;
-
-                            let result = xmlToObj(item);
-                            
-                            // معالجة النص المختلط مع السمات
-                            if (Object.keys(obj).length > 0 && typeof result === 'string' && node.childNodes.length === 1) {
-                                // إذا كان لدينا سمات ونص فقط
-                                obj["#text"] = result;
-                            } else if (typeof result === 'string' && Object.keys(obj).length === 0) {
-                                return result; // فقط نص
-                            } else {
-                                // إضافة للنتيجة
-                                if (obj[nodeName] === undefined) {
-                                    obj[nodeName] = result;
-                                } else {
-                                    if (obj[nodeName].push === undefined) {
-                                        const old = obj[nodeName];
-                                        obj[nodeName] = [];
-                                        obj[nodeName].push(old);
-                                    }
-                                    obj[nodeName].push(result);
-                                }
-                            }
-                        }
-                    }
-                    return obj;
-                }
-
-                const rootNode = xmlDoc.childNodes[0];
-                // تخطي التعليقات في الجذر للعثور على العنصر الجذر الحقيقي
-                let realRoot = null;
-                for(let i=0; i<xmlDoc.childNodes.length; i++) {
-                    if(xmlDoc.childNodes[i].nodeType === 1) {
-                        realRoot = xmlDoc.childNodes[i];
-                        break;
-                    }
-                }
-                
-                if(!realRoot) return {};
-                
-                let result = {};
-                result[realRoot.nodeName] = xmlToObj(realRoot);
-                return result;
-
-            } catch (e) {
-                return { error: e.message };
-            }
-        }
-
-        // --- 4. إدارة الأحداث والواجهة ---
-
-        function updateLabels() {
-            if (currentMode === 'xml2json') {
-                leftLabel.innerHTML = '<span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs">XML</span> المصدر';
-                rightLabel.innerHTML = '<span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">JSON</span> النتيجة';
-                btnXmlToJson.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
-                btnXmlToJson.classList.remove('text-slate-600');
-                btnJsonToXml.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
-                btnJsonToXml.classList.add('text-slate-600');
-                
-                // تحميل المثال الحالي في الجهة اليسرى
-                const key = exampleSelector.value;
-                inputArea.value = examples[key].xml;
-                outputArea.value = ""; // مسح النتيجة
-                
-            } else {
-                leftLabel.innerHTML = '<span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">JSON</span> المصدر';
-                rightLabel.innerHTML = '<span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs">XML</span> النتيجة';
-                btnJsonToXml.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
-                btnJsonToXml.classList.remove('text-slate-600');
-                btnXmlToJson.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
-                btnXmlToJson.classList.add('text-slate-600');
-
-                // تحميل المثال الحالي في الجهة اليسرى
-                const key = exampleSelector.value;
-                inputArea.value = examples[key].json;
-                outputArea.value = ""; // مسح النتيجة
-            }
-            explanationText.textContent = "اضغط على زر التحويل لرؤية النتيجة والشرح.";
-        }
-
-        // تبديل الأوضاع
-        btnXmlToJson.addEventListener('click', () => { currentMode = 'xml2json'; updateLabels(); });
-        btnJsonToXml.addEventListener('click', () => { currentMode = 'json2xml'; updateLabels(); });
-
-        // تغيير المثال
-        exampleSelector.addEventListener('change', () => {
-            updateLabels();
-        });
-
-        // زر التحويل
-        convertBtn.addEventListener('click', () => {
-            const key = exampleSelector.value;
-            const currentExample = examples[key];
-            
-            // إضافة تأثير تحميل بسيط
-            outputArea.value = "جاري التحويل...";
-            
-            setTimeout(() => {
-                if (currentMode === 'xml2json') {
-                    // في وضع الدليل، نعرض النتيجة المعدة مسبقاً لضمان دقة المثال التعليمي
-                    // ولكن إذا غير المستخدم النص، سنحاول تحويله (محاكاة)
-                    if (inputArea.value.trim() === currentExample.xml.trim()) {
-                        outputArea.value = currentExample.json;
-                    } else {
-                        // محاولة تحويل ديناميكي للمدخلات المخصصة
-                        const dynamicResult = parseXmlToJson(inputArea.value);
-                        outputArea.value = JSON.stringify(dynamicResult, null, 2);
-                    }
-                } else {
-                    // JSON to XML
-                    if (inputArea.value.trim() === currentExample.json.trim()) {
-                        outputArea.value = currentExample.xml;
-                    } else {
-                         // للتسهيل في هذا الدليل، نعرض رسالة عند تغيير الـ JSON يدوياً
-                         // لأن بناء XML من JSON ديناميكي يتطلب مكتبة ضخمة
-                         outputArea.value = "⚠️ ملاحظة: التحويل الديناميكي العكسي الكامل (من JSON مخصص إلى XML) يتطلب مكتبات متقدمة.\n\nإليك المثال القياسي:\n" + currentExample.xml;
-                    }
-                }
-                
-                // عرض الشرح
-                explanationText.innerHTML = `<strong>شرح المثال (${exampleSelector.options[exampleSelector.selectedIndex].text}):</strong><br/> ${currentExample.explanation}`;
-            }, 300);
-        });
-
-        // التهيئة الأولية
-        updateLabels();
-
-    </script>
+    <!-- Main Application Script -->
+    <script type="module" src="js/app.js"></script>
 </body>
+
 </html>

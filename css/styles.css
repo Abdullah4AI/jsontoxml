@@ -1,0 +1,45 @@
+/* Main Styles */
+body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    background-color: #f3f4f6;
+}
+
+/* Code Areas Styling */
+textarea {
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: scroll;
+    direction: ltr;
+    text-align: left;
+}
+
+.code-container {
+    transition: all 0.3s ease;
+}
+
+.code-container:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; 
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; 
+}
